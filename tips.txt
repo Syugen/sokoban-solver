@@ -1,0 +1,9 @@
+1. Create a bipartite graph in which one set contains all boxes while the other contains all storages. Each edge from a box to a storage is the “true distance” from the box to the storage. Then use Hungarian algorithm to decide which boxes should be moved to which storage.
+
+2. The “true distance” from a box to a storage is the minimum number of steps that the box need to move to get to the storage. To reduce repetitive calculations, distance matrices of storages of each puzzle can be saved in a global variable.
+
+3. The heuristic function value of some unsolvable states can be set to infinity so that it would be unlikely to be examined in given time. For example, a state is unsolvable if a box is in the corner of walls but is not on a storage, or a box is on the edge of the map but there are no storages on this edge, etc.
+
+4. The heuristic function value, if not infinity, should be some combination of difference parts. I used (a) the summation of true box-storage distances (each pair is obtained by the Hungarian algorithm mentioned in (1)), (b) the true distance between the robot and its nearest box, and (c) some negative valued bonus points mentioned in (5).
+
+5. Give bonus points for some special cases. For example, a box is encouraged to be pushed to the deepest position in a “room”. I didn’t do this but the robot can also be encouraged to (a) move some box first, (b) go to some specific direction (e.g. left) of some box so that it can push it in a better direction.
